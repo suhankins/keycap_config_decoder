@@ -9,7 +9,24 @@ interface KeyCaps {
 }
 
 interface Group {
-    [key: string]: { $BinSize: number; data: string };
+    [key: string]: { $BinSize: number; data: string } | Group[] | string;
+}
+
+async function readFileIntoGroup(
+    groupPath: string,
+    name: string,
+    group: Group
+) {
+    const file = await Deno.readFile(groupPath + `/${name}`);
+    const keyName = name.split('.')[0];
+
+    return {
+        ...group,
+        [keyName]: {
+            $BinSize: file.byteLength,
+            data: encode(file),
+        },
+    };
 }
 
 export default async function readFileStructure(path: string) {
@@ -23,17 +40,33 @@ export default async function readFileStructure(path: string) {
         const groupPath = path + `/${dirEntry.name}`;
 
         for await (const groupEntry of Deno.readDir(groupPath)) {
-            if (!groupEntry.isFile) continue;
-            const file = await Deno.readFile(groupPath + `/${groupEntry.name}`);
-            const name = groupEntry.name.split('.')[0];
-
-            group = {
-                ...group,
-                [name]: {
-                    $BinSize: file.byteLength,
-                    data: encode(file),
-                },
-            };
+            if (groupEntry.isFile) {
+                group = await readFileIntoGroup(
+                    groupPath,
+                    groupEntry.name,
+                    group
+                );
+            } else {
+                const controllerPath = groupPath + `/${groupEntry.name}`;
+                let controller: Group = {
+                    '$guid': groupEntry.name
+                };
+                for await (const controllerEntry of Deno.readDir(
+                    controllerPath
+                )) {
+                    controller = await readFileIntoGroup(
+                        controllerPath,
+                        controllerEntry.name,
+                        controller
+                    );
+                }
+                group.controller = [
+                    ...(Array.isArray(group.controller)
+                        ? group.controller
+                        : []),
+                    controller,
+                ];
+            }
         }
 
         groups = { ...groups, [dirEntry.name]: group };
