@@ -1,8 +1,6 @@
 # keycap_config.xml Decoder
 
-Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games like Crazy Taxi, Sonic Adventure DX, Valkyria Chronicles, and others.
-
-`keycap_config.xml` contains generated keyboard and Xbox controller button icons to be used in-game.
+Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games like Crazy Taxi, Sonic Adventure DX, Valkyria Chronicles, and others. It stores generated keyboard and Xbox controller button icons to be used in-game.
 
 ## Guide
 
@@ -12,6 +10,12 @@ Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games lik
 4. Once you overwrite icons you want to change, drag and drop your `output-[current date]` on the `keycapConfig.exe`. This will create a file called `keycap_config-[current date].xml`
 5. Remove `-[current date]` from file's name and replace original `keycap_config.xml` with it
 6. Game can potentially overwrite our file, which we don't want, so it's best to right click your `keycap_config.xml`, go to properties, and check "Read-only" checkbox
+
+>[!NOTE]
+>Edited icons might not appear in some places (i.e. configuration app, save file menu in Valkyria Chronicles).
+
+>[!NOTE]
+>If edited icons look broken, it's probably because game uses newer DDS format (i.e. Valkyria Chronicles uses BC7, which is not supported by GIMP)
 
 ## Usage
 
