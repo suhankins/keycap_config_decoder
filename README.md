@@ -1,8 +1,6 @@
 # keycap_config.xml Decoder
 
-Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games like Crazy Taxi, Sonic Adventure DX, Valkyria Chronicles, and others.
-
-`keycap_config.xml` contains generated keyboard and Xbox controller button icons to be used in-game.
+Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games like Crazy Taxi, Sonic Adventure DX, Valkyria Chronicles, and others. It stores generated keyboard and Xbox controller button icons to be used in-game.
 
 ## Guide
 
