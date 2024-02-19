@@ -13,6 +13,12 @@ Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games lik
 5. Remove `-[current date]` from file's name and replace original `keycap_config.xml` with it
 6. Game can potentially overwrite our file, which we don't want, so it's best to right click your `keycap_config.xml`, go to properties, and check "Read-only" checkbox
 
+>[!NOTE]
+>Edited icons might not appear in some places (i.e. configuration app, save file menu in Valkyria Chronicles).
+
+>[!NOTE]
+>If edited icons look broken, it's probably because game uses newer DDS format (i.e. Valkyria Chronicles uses BC7, which is not supported by GIMP)
+
 ## Usage
 
 Just drag-and-dropping files and folders on the executable should work, but you can also use it with your terminal emulator.
