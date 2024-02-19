@@ -6,7 +6,7 @@ import readFileStructure from './files/readFileStructure.ts';
 import buildXml from './xml/buildXml.ts';
 
 function getTimeString() {
-    return format(new Date(), 'yyyy-mm-dd-HH-mm');
+    return format(new Date(), 'yyyy-MM-dd-HH-mm-ss');
 }
 
 function printHelp() {
