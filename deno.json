@@ -1,0 +1,6 @@
+{
+    "tasks": {
+        "compile": "deno compile --allow-read --allow-write --output keycapConfig.exe ./src/main.ts",
+        "run": "deno run --allow-read --allow-write ./src/main.ts"
+    }
+}
