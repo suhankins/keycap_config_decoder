@@ -33,7 +33,9 @@ export default async function readFileStructure(path: string) {
     let groups: KeyCaps = {};
 
     for await (const dirEntry of Deno.readDir(path)) {
-        if (!dirEntry.isDirectory) continue;
+        if (!dirEntry.isDirectory) {
+            continue;
+        }
 
         let group: Group = {};
 
@@ -41,6 +43,9 @@ export default async function readFileStructure(path: string) {
 
         for await (const groupEntry of Deno.readDir(groupPath)) {
             if (groupEntry.isFile) {
+                if (groupEntry.name.split('.').at(-1)?.toLowerCase() !== 'dds') {
+                    continue;
+                }
                 group = await readFileIntoGroup(
                     groupPath,
                     groupEntry.name,
