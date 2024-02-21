@@ -4,7 +4,7 @@ Decodes and encodes `keycap_config.xml` file, found in a bunch of Sega games lik
 
 ## Guide
 
-1. Run the game at least once, so it generates `keycap_config.xml`
+1. Run the game at least once with input device of your choice, so it generates `keycap_config.xml` with all the required icons
 2. Drag and drop `keycap_config.xml` on the `keycapConfig.exe`. This will create a folder called `output-[current date]`
 3. Find icons in generated folders that you want to change. Icons are in `.DDS`, so you will either need to use [GIMP](https://www.gimp.org/), which supports DDS out of the box, or download [Nvidia plugin](https://developer.nvidia.com/nvidia-texture-tools-exporter) for Photoshop.
 4. Once you overwrite icons you want to change, drag and drop your `output-[current date]` on the `keycapConfig.exe`. This will create a file called `keycap_config-[current date].xml`
