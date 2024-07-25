@@ -1,7 +1,7 @@
 import { XMLBuilder } from 'npm:fast-xml-parser';
 import type { Groups } from '../files/readFileStructure.ts';
 
-export default function buildXml(groups: Groups) {
+export default function buildXml(groups: Groups): string {
     const builder = new XMLBuilder({
         attributeNamePrefix: '$',
         ignoreAttributes: false,

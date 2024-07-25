@@ -16,7 +16,7 @@ async function readFileIntoGroup(
     groupPath: string,
     name: string,
     group: Group
-) {
+): Promise<Group> {
     const file = await Deno.readFile(groupPath + `/${name}`);
     const keyName = name.split('.')[0];
 
@@ -29,7 +29,7 @@ async function readFileIntoGroup(
     };
 }
 
-export default async function readFileStructure(path: string) {
+export default async function readFileStructure(path: string): Promise<Groups> {
     let groups: KeyCaps = {};
 
     for await (const dirEntry of Deno.readDir(path)) {
@@ -43,7 +43,9 @@ export default async function readFileStructure(path: string) {
 
         for await (const groupEntry of Deno.readDir(groupPath)) {
             if (groupEntry.isFile) {
-                if (groupEntry.name.split('.').at(-1)?.toLowerCase() !== 'dds') {
+                if (
+                    groupEntry.name.split('.').at(-1)?.toLowerCase() !== 'dds'
+                ) {
                     continue;
                 }
                 group = await readFileIntoGroup(
@@ -54,7 +56,7 @@ export default async function readFileStructure(path: string) {
             } else {
                 const controllerPath = groupPath + `/${groupEntry.name}`;
                 let controller: Group = {
-                    '$guid': groupEntry.name
+                    $guid: groupEntry.name,
                 };
                 for await (const controllerEntry of Deno.readDir(
                     controllerPath

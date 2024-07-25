@@ -8,7 +8,10 @@ async function writeToFile(
     await Deno.writeFile(folderPath + `/k1_${index}.dds`, data);
 }
 
-async function handleController(controller: ParsedController, path: string) {
+/**
+ * Handles cases where there are multiple controllers of a given type
+ */
+async function handleController(controller: ParsedController, path: string): Promise<void> {
     const controllerPath = path + `/${controller.guid}`;
     await Deno.mkdir(controllerPath, {
         recursive: true,
@@ -23,7 +26,7 @@ async function handleController(controller: ParsedController, path: string) {
 export default async function writeFileStructure(
     path: string,
     structure: FileStructure
-) {
+): Promise<void> {
     for (const group of structure) {
         const folderPath = path + `/${group.name}`;
         await Deno.mkdir(folderPath, {

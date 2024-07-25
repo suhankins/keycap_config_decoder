@@ -1,7 +1,10 @@
 import { XMLParser } from 'npm:fast-xml-parser';
 import decode from '../base64/decode.ts';
 
-export type FileStructure = ReturnType<typeof parseXml>;
+export type FileStructure = {
+    name: string;
+    items: (Uint8Array | ParsedController[])[];
+}[];
 
 type InputGroup = {
     [key: string]: { '#text': string } | Controller[];
@@ -17,7 +20,7 @@ export type ParsedController = {
     items: Uint8Array[];
 };
 
-export default function parseXml(rawXml: string) {
+export default function parseXml(rawXml: string): FileStructure {
     const parser = new XMLParser({
         ignoreAttributes: false,
         attributeNamePrefix: '$',

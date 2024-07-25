@@ -5,11 +5,11 @@ import writeFileStructure from './files/writeFileStructure.ts';
 import readFileStructure from './files/readFileStructure.ts';
 import buildXml from './xml/buildXml.ts';
 
-function getTimeString() {
+function getTimeString(): string {
     return format(new Date(), 'yyyy-MM-dd-HH-mm-ss');
 }
 
-function printHelp() {
+function printHelp(): void {
     console.log(
         `\nDecodes and encodes keycap_config.xml file, found in a bunch of Sega games.\n\nDecode keycap_config.xml:\nkeycapConfig <xml_file> [output_directory]\n\nEncode directory structure to keycap_config.xml:\nkeycapConfig <directory> [output_file]\n`
     );
